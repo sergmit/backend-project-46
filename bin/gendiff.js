@@ -1,13 +1,14 @@
 #!/usr/bin/env node
 
-import { program } from 'commander';
+import action from "../src/commander.js";
+import parsingFile from "../src/parsingFile.js";
 
-program.name('gendiff').description('Compares two configuration files and shows a difference.');
+action();
 
-program.option('-V, --version', 'output the version number')
-
-program.parse();
+const data = parsingFile('filepath1.json');
+console.log(data);
 
 export default function genDiff (file1, file2) {
-
+    const dataFile1 = parsingFile(file1);
+    const dataFile2 = parsingFile(file2);
 }
