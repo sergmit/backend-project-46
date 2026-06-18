@@ -1,11 +1,12 @@
-import fs from 'fs';
-import * as path from "node:path";
+import fs from 'fs'
+import * as path from 'node:path'
+
 const parsingFile = (file) => {
-    const filePath = path.resolve(process.cwd(), 'data', file);
-    const content = fs.readFileSync(file);
-    if (content) {
-        return JSON.parse(content);
-    }
+  const filePath1 = path.resolve(process.cwd(), 'data', file)
+  const content = fs.readFileSync(filePath1)
+  if (content) {
+    return JSON.parse(content.toString())
+  }
 }
 
-export default parsingFile;
+export default parsingFile

@@ -1,14 +1,19 @@
 #!/usr/bin/env node
 
-import action from "../src/commander.js";
-import parsingFile from "../src/parsingFile.js";
+import action from '../src/commander.js'
+import parsingFile from '../src/parsingFile.js'
+import dataCompare from '../src/dataCompare.js'
 
-action();
+action()
 
-const data = parsingFile('filepath1.json');
+const data = parsingFile('filepath1.json')
 console.log(data);
 
-export default function genDiff (file1, file2) {
-    const dataFile1 = parsingFile(file1);
-    const dataFile2 = parsingFile(file2);
-}
+(function genDiff() {
+  console.log('gendiff', process.argv)
+  const dataFile1 = parsingFile(process.argv[2])
+  const dataFile2 = parsingFile(process.argv[3])
+  const res = dataCompare(dataFile1, dataFile2)
+  console.log('res', res)
+  // const dataFile2 = parsingFile(file2);
+})()
