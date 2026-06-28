@@ -1,7 +1,5 @@
 export default (obj1, obj2) => {
   let res = '{\n'
-  // const dataSort1 = Object.entries(obj1).sort((a, b) => a[0].localeCompare(b[0]));
-  // const dataSort1 = Object.entries(obj2).sort((a, b) => a[0].localeCompare(b[0]));
   const keys = [...new Set([...Object.keys(obj1), ...Object.keys(obj2)])].sort()
 
   keys.forEach((key) => {

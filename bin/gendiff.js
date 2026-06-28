@@ -10,9 +10,32 @@ const data = parsingFile('filepath1.json')
 console.log(data);
 
 (function genDiff() {
-  console.log('gendiff', process.argv)
-  const dataFile1 = parsingFile(process.argv[2])
-  const dataFile2 = parsingFile(process.argv[3])
+  const args = process.argv.slice(2)
+  let file1, file2;
+  let format = 'json';
+  args.forEach((item, i) => {
+    if (i === 0) {
+      file1 = item;
+    }
+    if (i === 1) {
+      file2 = item;
+    }
+  })
+
+  const dir = process.env.NODE_ENV === 'test'
+    ? '__fixtures__' : 'data';
+
+  let dataFile1, dataFile2;
+  try {
+    dataFile1 = parsingFile(file1, dir);
+    dataFile2 = parsingFile(file2, dir)
+  } catch (e) {
+    console.error(e.message);
+    return;
+  }
+
+
+
   const res = dataCompare(dataFile1, dataFile2)
   console.log('res', res)
   // const dataFile2 = parsingFile(file2);
