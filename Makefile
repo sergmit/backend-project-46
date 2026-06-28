@@ -1,6 +1,6 @@
 # Bash
 install:
-	npm ci
+	npm install
 
 lint:
 	npx eslint .
