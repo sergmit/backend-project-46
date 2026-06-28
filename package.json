@@ -20,11 +20,11 @@
   "type": "module",
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@jest/globals": "^30.4.1",
+    "@jest/globals": "^27.5.1",
     "@stylistic/eslint-plugin": "^5.10.0",
     "eslint": "^10.4.0",
     "globals": "^17.6.0",
-    "jest": "^30.4.2"
+    "jest-cli": "^30.4.2"
   },
   "bugs": {
     "url": "https://github.com/sergmit/backend-project-46/issues"
