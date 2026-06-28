@@ -5,13 +5,13 @@ import { parse } from 'yaml'
 const parsingFile = (file, dir = 'data') => {
   const filePath = path.resolve(process.cwd(), dir, file)
   if (fs.existsSync(filePath) === false) {
-    throw new Error(`No such file ${file}`);
+    throw new Error(`No such file ${file}`)
   }
-  const ext = path.extname(file);
+  const ext = path.extname(file)
   const content = fs.readFileSync(filePath)
   if (content) {
-    const dataString = content.toString();
-    switch(ext) {
+    const dataString = content.toString()
+    switch (ext) {
       case '.json':
         return JSON.parse(dataString)
       case '.yaml':
@@ -20,9 +20,8 @@ const parsingFile = (file, dir = 'data') => {
       default:
         throw new Error(`Extension ${ext} not found`)
     }
-
   }
-  throw new Error('Не удалось спарсить файл');
+  throw new Error('Не удалось спарсить файл')
 }
 
 export default parsingFile

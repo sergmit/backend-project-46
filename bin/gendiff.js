@@ -4,39 +4,35 @@ import action from '../src/commander.js'
 import parsingFile from '../src/parsingFile.js'
 import dataCompare from '../src/dataCompare.js'
 
-action()
-
-const data = parsingFile('filepath1.json')
-console.log(data);
-
 (function genDiff() {
+  action()
   const args = process.argv.slice(2)
-  let file1, file2;
-  let format = 'json';
+  let file1, file2
+
   args.forEach((item, i) => {
     if (i === 0) {
-      file1 = item;
+      file1 = item
     }
     if (i === 1) {
-      file2 = item;
+      file2 = item
     }
   })
 
   const dir = process.env.NODE_ENV === 'test'
-    ? '__fixtures__' : 'data';
+    ? '__fixtures__'
+    : 'data'
 
-  let dataFile1, dataFile2;
+  let dataFile1, dataFile2
   try {
-    dataFile1 = parsingFile(file1, dir);
+    dataFile1 = parsingFile(file1, dir)
     dataFile2 = parsingFile(file2, dir)
-  } catch (e) {
-    console.error(e.message);
-    return;
+  }
+  catch (e) {
+    console.error(e.message)
+    return
   }
 
-
-
   const res = dataCompare(dataFile1, dataFile2)
-  console.log('res', res)
+  console.log(res)
   // const dataFile2 = parsingFile(file2);
 })()
