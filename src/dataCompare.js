@@ -5,7 +5,7 @@ const dataCompare = (obj1, obj2, level = 1) => {
   for (let key of keys) {
     if (typeof obj1[key] === 'object' && typeof obj2[key] === 'object') {
       res += `${indent(level)}${key}: ` + dataCompare(obj1[key], obj2[key], level + 1)
-      continue;
+      continue
     }
     if (obj1[key] !== undefined && obj2[key] !== undefined && obj1[key] === obj2[key]) {
       res += `${indent(level)}${key}: ${obj1[key]}\n`
@@ -30,4 +30,4 @@ const dataCompare = (obj1, obj2, level = 1) => {
 export default dataCompare
 
 const indent = level => ' '.repeat(level * 4)
-const indentWithModify = level => ' '.repeat(level * 4 - 2);
+const indentWithModify = level => ' '.repeat(level * 4 - 2)

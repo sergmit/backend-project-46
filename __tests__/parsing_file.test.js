@@ -5,12 +5,12 @@ describe('Parsing files test', () => {
   test('parsing file json', () => {
     const data = parsingFile('filepath1.json', '__fixtures__')
     expect(data).toEqual({
-      host: "hexlet.io",
+      host: 'hexlet.io',
       timeout: 50,
-      proxy: "123.234.53.22",
+      proxy: '123.234.53.22',
       nested: {
-        test: 8
-      }
+        test: 8,
+      },
     })
   })
 
@@ -21,8 +21,8 @@ describe('Parsing files test', () => {
       age: 25,
       name: {
         firstname: 'Nick',
-        lastname: 'Black'
-      }
+        lastname: 'Black',
+      },
     })
   })
 })
