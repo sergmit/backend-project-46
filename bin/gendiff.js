@@ -4,8 +4,9 @@ import action from '../src/commander.js'
 import parsingFile from '../src/parsingFile.js'
 import dataCompare from '../src/dataCompare.js'
 
+action();
+
 (function genDiff() {
-  action()
   const args = process.argv.slice(2)
   let file1, file2
 
@@ -34,5 +35,4 @@ import dataCompare from '../src/dataCompare.js'
 
   const res = dataCompare(dataFile1, dataFile2)
   console.log(res)
-  // const dataFile2 = parsingFile(file2);
 })()

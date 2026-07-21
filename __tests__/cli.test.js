@@ -16,11 +16,16 @@ describe('Cli command tests', () => {
     expect(stdout).toBe(
       `{
   - host: hexlet.io
+    nested: {
+      - test: 8
+      + test: 5
+    }
   + power: 0
   - proxy: 123.234.53.22
   - timeout: 50
   + verbose: true
 }
+
 `,
     )
   })
@@ -34,7 +39,14 @@ describe('Cli command tests', () => {
   + age: 34
   - height: 23
   + height: 15
+    name: {
+      - firstname: Nick
+      + firstname: Sara
+      - lastname: Black
+      + lastname: White
+    }
 }
+
 `,
     )
   })
