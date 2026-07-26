@@ -9,7 +9,7 @@ action();
 
 (function genDiff() {
   const args = process.argv.slice(2)
-  let file1, file2, formatName = 'object'
+  let file1, file2, formatName = 'json'
   let nextFormat = false
 
   for (let item of args) {
@@ -49,7 +49,7 @@ action();
     case 'plain':
       res = plainFormatter(dataFile1, dataFile2)
       break
-    case 'object':
+    case 'json':
       res = objectFormatter(dataFile1, dataFile2)
       break
     default:
