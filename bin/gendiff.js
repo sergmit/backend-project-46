@@ -2,22 +2,34 @@
 
 import action from '../src/commander.js'
 import parsingFile from '../src/parsingFile.js'
-import dataCompare from '../src/dataCompare.js'
+import objectFormatter from '../src/formatters/objectFormatter.js'
+import plainFormatter from '../src/formatters/plainFormatter.js'
 
 action();
 
 (function genDiff() {
   const args = process.argv.slice(2)
-  let file1, file2
+  let file1, file2, formatName = 'object'
+  let nextFormat = false
 
-  args.forEach((item, i) => {
-    if (i === 0) {
-      file1 = item
+  for (let item of args) {
+    if (item === '--format' || item === '-f') {
+      nextFormat = true
+      continue
     }
-    if (i === 1) {
+    if (nextFormat) {
+      formatName = item
+      nextFormat = false
+      continue
+    }
+    if (!file1) {
+      file1 = item
+      continue
+    }
+    if (!file2) {
       file2 = item
     }
-  })
+  }
 
   const dir = process.env.NODE_ENV === 'test'
     ? '__fixtures__'
@@ -32,7 +44,17 @@ action();
     console.error(e.message)
     return
   }
+  let res
+  switch (formatName) {
+    case 'plain':
+      res = plainFormatter(dataFile1, dataFile2)
+      break
+    case 'object':
+      res = objectFormatter(dataFile1, dataFile2)
+      break
+    default:
+      throw new Error(`Formatter ${formatName} not found`)
+  }
 
-  const res = dataCompare(dataFile1, dataFile2)
   console.log(res)
 })()

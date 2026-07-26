@@ -1,4 +1,4 @@
-import dataCompare from '../src/dataCompare.js'
+import objectFormatter from '../src/formatters/objectFormatter.js'
 import { expect, test, describe } from '@jest/globals'
 
 describe('data compare', () => {
@@ -18,7 +18,7 @@ describe('data compare', () => {
         test: 5,
       },
     }
-    const data = dataCompare(obj1, obj2)
+    const data = objectFormatter(obj1, obj2)
     expect(data).toEqual(
       `{
   - host: hexlet.io
