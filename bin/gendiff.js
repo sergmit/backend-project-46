@@ -2,8 +2,9 @@
 
 import action from '../src/commander.js'
 import parsingFile from '../src/parsingFile.js'
-import objectFormatter from '../src/formatters/objectFormatter.js'
+import stylishFormatter from '../src/formatters/stylishFormatter.js'
 import plainFormatter from '../src/formatters/plainFormatter.js'
+import jsonFormatter from "../src/formatters/jsonFormatter.js";
 
 action()
 
@@ -27,8 +28,10 @@ function genDiff(file1, file2, format = 'stylish') {
       res = plainFormatter(dataFile1, dataFile2)
       break
     case 'json':
+      res = jsonFormatter(dataFile1, dataFile2)
+      break;
     case 'stylish':
-      res = objectFormatter(dataFile1, dataFile2)
+      res = stylishFormatter(dataFile1, dataFile2)
       break
     default:
       throw new Error(`Formatter ${format} not found`)
