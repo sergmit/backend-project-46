@@ -7,7 +7,7 @@ import plainFormatter from '../src/formatters/plainFormatter.js'
 
 action()
 
-export function genDiff(file1, file2, format = 'stylish') {
+function genDiff(file1, file2, format = 'stylish') {
   const dir = process.env.NODE_ENV === 'test'
     ? '__fixtures__'
     : 'data'
@@ -36,3 +36,5 @@ export function genDiff(file1, file2, format = 'stylish') {
 
   return res
 }
+
+export default genDiff;
