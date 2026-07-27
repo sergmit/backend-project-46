@@ -1,4 +1,3 @@
-import toString from '../utils/objectToString.js'
 const objectFormatter = (obj1, obj2, level = 1) => {
   let res = `{\n`
   const keys = [...new Set([...Object.keys(obj1), ...Object.keys(obj2)])].sort()
@@ -9,23 +8,35 @@ const objectFormatter = (obj1, obj2, level = 1) => {
       continue
     }
     if (obj1[key] !== undefined && obj2[key] !== undefined && obj1[key] === obj2[key]) {
-      res += `${indent(level)}${key}: ${obj1[key]}\n`
+      res += `${indent(level)}${key}: ${printObj(obj1[key], level + 1)}\n`
     }
     if (obj1[key] !== undefined && obj2[key] !== undefined && obj1[key] !== obj2[key]) {
-      res += `${indentWithModify(level)}- ${key}: ${obj1[key]}\n`
-      res += `${indentWithModify(level)}+ ${key}: ${obj2[key]}\n`
+      res += `${indentWithModify(level)}- ${key}: ${printObj(obj1[key], level + 1)}\n`
+      res += `${indentWithModify(level)}+ ${key}: ${printObj(obj2[key], level + 1)}\n`
     }
     if (obj1[key] !== undefined && obj2[key] === undefined) {
-      res += `${indentWithModify(level)}- ${key}: ${obj1[key]}\n`
+      res += `${indentWithModify(level)}- ${key}: ${printObj(obj1[key], level + 1)}\n`
     }
     if (obj1[key] === undefined && obj2[key] !== undefined) {
-      res += `${indentWithModify(level)}+ ${key}: ${obj2[key]}\n`
+      res += `${indentWithModify(level)}+ ${key}: ${printObj(obj2[key], level + 1)}\n`
     }
   }
 
   res += `${indent(level - 1)}}\n`
 
   return res
+}
+
+const printObj = (obj, level = 1) => {
+  if (['string', 'number', 'boolean'].includes(typeof obj) || obj === null) {
+    return obj;
+  }
+  let res = '{\n';
+  for (let key in obj) {
+    res += `${indent(level)}${key}: ${printObj(obj[key], level + 2)}`
+  }
+  res += `\n${indent(level - 1)}}`
+  return res;
 }
 
 export default objectFormatter
