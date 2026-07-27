@@ -16,10 +16,10 @@ const objectFormatter = (obj1, obj2, level = 1) => {
       res += `${indentWithModify(level)}+ ${key}: ${obj2[key]}\n`
     }
     if (obj1[key] !== undefined && obj2[key] === undefined) {
-      res += `${indentWithModify(level)}- ${key}: ${toString(obj1[key])}\n`
+      res += `${indentWithModify(level)}- ${key}: ${obj1[key]}\n`
     }
     if (obj1[key] === undefined && obj2[key] !== undefined) {
-      res += `${indentWithModify(level)}+ ${key}: ${toString(obj2[key])}\n`
+      res += `${indentWithModify(level)}+ ${key}: ${obj2[key]}\n`
     }
   }
 
