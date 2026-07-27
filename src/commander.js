@@ -10,6 +10,10 @@ const action = () => {
     .action((filepath1, filepath2) => {
       console.log(genDiff(filepath1, filepath2, program.opts().format));
     })
+  if (process.argv.length < 3) {
+    program.help();
+    return;
+  }
   program.parse()
 }
 
