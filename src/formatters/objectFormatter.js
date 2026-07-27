@@ -29,14 +29,14 @@ const objectFormatter = (obj1, obj2, level = 1) => {
 
 const printObj = (obj, level = 1) => {
   if (['string', 'number', 'boolean'].includes(typeof obj) || obj === null) {
-    return `${obj}`;
+    return `${obj}`
   }
-  let res = '{\n';
+  let res = '{\n'
   for (let key in obj) {
     res += `${indent(level)}${key}: ${printObj(obj[key], level + 1)}\n`
   }
   res += `${indent(level - 1)}}`
-  return res;
+  return res
 }
 
 export default objectFormatter

@@ -5,32 +5,9 @@ import parsingFile from '../src/parsingFile.js'
 import objectFormatter from '../src/formatters/objectFormatter.js'
 import plainFormatter from '../src/formatters/plainFormatter.js'
 
-action();
+action()
 
 export function genDiff(file1, file2, format = 'stylish') {
-  const args = process.argv.slice(2)
-  // let file1, file2, formatName = 'stylish'
-  let nextFormat = false
-
-  // for (let item of args) {
-  //   if (item === '--format' || item === '-f') {
-  //     nextFormat = true
-  //     continue
-  //   }
-  //   if (nextFormat) {
-  //     formatName = item
-  //     nextFormat = false
-  //     continue
-  //   }
-  //   if (!file1) {
-  //     file1 = item
-  //     continue
-  //   }
-  //   if (!file2) {
-  //     file2 = item
-  //   }
-  // }
-
   const dir = process.env.NODE_ENV === 'test'
     ? '__fixtures__'
     : 'data'
@@ -57,5 +34,5 @@ export function genDiff(file1, file2, format = 'stylish') {
       throw new Error(`Formatter ${format} not found`)
   }
 
-  return res;
+  return res
 }
