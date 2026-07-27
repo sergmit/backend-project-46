@@ -33,7 +33,7 @@ const printObj = (obj, level = 1) => {
   }
   let res = '{\n';
   for (let key in obj) {
-    res += `${indent(level)}${key}: ${printObj(obj[key], level + 2)}`
+    res += `${indent(level)}${key}: ${printObj(obj[key], level + 1)}`
   }
   res += `\n${indent(level - 1)}}`
   return res;
