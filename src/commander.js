@@ -11,7 +11,7 @@ const action = () => {
       console.log(genDiff(filepath1, filepath2, program.opts().format))
     })
   if (process.argv.length < 3) {
-    program.help()
+    program.outputHelp()
   }
   else {
     program.parse()
