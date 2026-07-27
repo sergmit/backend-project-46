@@ -32,7 +32,7 @@ const formatter = (item1, item2) => {
   let outcome = ''
   for (let key of keys) {
     if (obj1[key] !== undefined && obj2[key] !== undefined && obj1[key] !== obj2[key]) {
-      outcome += `Property '${key}' was updated from ${toString(obj1[key])} to ${toString(obj2[key])}\n`
+      outcome += `Property '${key}' was updated. From ${toString(obj1[key])} to ${toString(obj2[key])}\n`
     }
     if (obj1[key] !== undefined && obj2[key] === undefined && obj1[key] !== obj2[key]) {
       outcome += `Property '${key}' was removed\n`
