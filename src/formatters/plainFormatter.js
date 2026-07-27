@@ -1,9 +1,5 @@
-const toString = (val) => {
-  if (val !== null && typeof val === 'object') {
-    return '[complex value]'
-  }
-  return val
-}
+import toString from '../utils/objectToString.js'
+
 const isObject = (obj) => {
   return typeof obj === 'object' && obj !== null && !Array.isArray(obj)
 }
