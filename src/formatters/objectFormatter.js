@@ -24,7 +24,7 @@ const objectFormatter = (obj1, obj2, level = 1) => {
 
   res += `${indent(level - 1)}}\n`
 
-  return res.trim()
+  return res
 }
 
 const printObj = (obj, level = 1) => {

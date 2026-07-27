@@ -34,7 +34,7 @@ function genDiff(file1, file2, format = 'stylish') {
       throw new Error(`Formatter ${format} not found`)
   }
 
-  return res
+  return res.trim()
 }
 
 export default genDiff;
