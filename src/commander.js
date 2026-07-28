@@ -10,7 +10,12 @@ const action = () => {
     .action(async (filepath1, filepath2) => {
       console.log(genDiff(filepath1, filepath2, program.opts().format))
     })
-  program.parse()
+  if (process.argv.length < 3) {
+    program.outputHelp()
+  }
+  else {
+    program.parse()
+  }
 }
 
 export default action
