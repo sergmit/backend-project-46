@@ -1,8 +1,17 @@
-import toString from '../utils/objectToString.js'
-
 const isObject = (obj) => {
   return typeof obj === 'object' && obj !== null && !Array.isArray(obj)
 }
+
+const toString = (val) => {
+  if (typeof val === 'string') {
+    return `'${val}'`
+  }
+  if (val !== null && typeof val === 'object') {
+    return '[complex value]'
+  }
+  return val
+}
+
 function flattenObject(obj1, obj2, prefix = '', result1 = {}, result2 = {}) {
   const keys = [...new Set([...Object.keys(obj1), ...Object.keys(obj2)])].sort()
 

@@ -31,7 +31,7 @@ describe('Cli command tests', () => {
   })
 
   test('Test compare yaml', async () => {
-    const { stdout, stderr } = await execAsync('node bin/gendiff.js file1.yaml file2.yaml')
+    const { stdout, stderr } = await execAsync('node bin/gendiff.js file1.yaml file2.yml')
     expect(stderr).toBe('')
     expect(stdout).toBe(
       `{

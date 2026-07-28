@@ -1,27 +1,27 @@
 import fs from 'fs'
 import * as path from 'node:path'
-import { parse } from 'yaml'
+import { load } from 'js-yaml'
 
-const parsingFile = (file, dir = 'data') => {
-  const filePath = path.resolve(process.cwd(), dir, file)
-  if (fs.existsSync(filePath) === false) {
-    throw new Error(`No such file ${file}`)
+const fetchParser = (val) => {
+  console.log('fetch parser')
+  return {
+    '.json': JSON.parse(val),
+    '.yml': load(val),
+    '.yaml': load(val),
   }
-  const ext = path.extname(file)
+}
+
+const parsingFile = (filePath) => {
+  if (fs.existsSync(filePath) === false) {
+    throw new Error(`No such file ${filePath}`)
+  }
+  const ext = path.extname(filePath)
   const content = fs.readFileSync(filePath)
   if (content) {
     const dataString = content.toString()
-    switch (ext) {
-      case '.json':
-        return JSON.parse(dataString)
-      case '.yaml':
-      case '.yml':
-        return parse(dataString)
-      default:
-        throw new Error(`Extension ${ext} not found`)
-    }
+    const parser = fetchParser(dataString)
+    return parser[ext]
   }
-  throw new Error('Не удалось спарсить файл')
 }
 
 export default parsingFile

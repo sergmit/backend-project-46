@@ -32,6 +32,6 @@
   "homepage": "https://github.com/sergmit/backend-project-46#readme",
   "dependencies": {
     "commander": "^15.0.0",
-    "yaml": "^2.9.0"
+    "js-yaml": "^5.2.2"
   }
 }
