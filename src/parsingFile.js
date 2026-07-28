@@ -1,12 +1,12 @@
 import fs from 'fs'
 import * as path from 'node:path'
-import { load } from 'js-yaml'
+import {load, YAML11_SCHEMA} from 'js-yaml'
 
 const fetchParser = (val) => {
   return {
-    '.json': JSON.parse(val),
-    '.yml': load(val),
-    '.yaml': load(val),
+    '.json': () => JSON.parse(val),
+    '.yml': () => load(val),
+    '.yaml': () => load(val),
   }
 }
 
@@ -15,11 +15,10 @@ const parsingFile = (filePath) => {
     throw new Error(`No such file ${filePath}`)
   }
   const ext = path.extname(filePath)
-  const content = fs.readFileSync(filePath)
+  const content = fs.readFileSync(filePath, 'utf-8')
   if (content) {
-    const dataString = content.toString()
-    const parser = fetchParser(dataString)
-    return parser[ext]
+    const parser = fetchParser(content)
+    return parser[ext]()
   }
 }
 
