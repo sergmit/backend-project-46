@@ -43,7 +43,7 @@ const fetchCompareTree = (obj1, obj2) => {
           type: Type.Updated,
           children: null,
           oldValue: obj1[key],
-          newValue: obj1[key],
+          newValue: obj2[key],
         },
       )
       continue

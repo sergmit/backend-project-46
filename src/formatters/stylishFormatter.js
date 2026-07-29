@@ -3,7 +3,8 @@ import fetchCompareTree, { Type } from '../fetchCompareTree.js'
 const printModification = {
   [Type.Added]: (item, level) => `${indentWithModify(level)}+ ${item.key}: ${printObj(item.newValue, level + 1)}\n`,
   [Type.Removed]: (item, level) => `${indentWithModify(level)}- ${item.key}: ${printObj(item.oldValue, level + 1)}\n`,
-  [Type.Updated]: (item, level) => `${indentWithModify(level)}- ${item.key}: ${printObj(item.oldValue, level + 1)}\n`,
+  [Type.Updated]: (item, level) => `${indentWithModify(level)}- ${item.key}: ${printObj(item.oldValue, level + 1)}
+${indentWithModify(level)}+ ${item.key}: ${printObj(item.newValue, level + 1)}\n`,
   [Type.Equal]: (item, level) => `${indent(level)}${item.key}: ${printObj(item.oldValue, level + 1)}\n`,
   [Type.Nested]: (item, level, nestedValue) => `${indent(level)}${item.key}: ` + nestedValue,
 }
