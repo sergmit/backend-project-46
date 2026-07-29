@@ -24,6 +24,18 @@ const fetchCompareTree = (obj1, obj2) => {
       )
       continue
     }
+    if (obj1[key] !== undefined && obj2[key] !== undefined && obj1[key] === obj2[key]) {
+      res.push(
+        {
+          key,
+          type: Type.Equal,
+          children: null,
+          oldValue: obj1[key],
+          newValue: obj1[key],
+        },
+      )
+      continue
+    }
     if (obj1[key] !== undefined && obj2[key] !== undefined && obj1[key] !== obj2[key]) {
       res.push(
         {
