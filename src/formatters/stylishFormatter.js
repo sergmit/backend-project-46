@@ -1,36 +1,36 @@
-const stylishFormatter = (obj1, obj2, level = 1) => {
-  let res = `{\n`
-  const keys = [...new Set([...Object.keys(obj1), ...Object.keys(obj2)])].sort()
+import fetchCompareTree, { Type } from '../fetchCompareTree.js'
 
-  for (let key of keys) {
-    if (typeof obj1[key] === 'object' && typeof obj2[key] === 'object') {
-      res += `${indent(level)}${key}: ` + stylishFormatter(obj1[key], obj2[key], level + 1)
-      continue
+const printModification = {
+  [Type.Added]: (item, level) => `${indentWithModify(level)}+ ${item.key}: ${printObj(item.newValue, level + 1)}\n`,
+  [Type.Removed]: (item, level) => `${indentWithModify(level)}- ${item.key}: ${printObj(item.oldValue, level + 1)}\n`,
+  [Type.Updated]: (item, level) => `${indentWithModify(level)}- ${item.key}: ${printObj(item.oldValue, level + 1)}\n`,
+  [Type.Equal]: (item, level) => `${indent(level)}${item.key}: ${printObj(item.oldValue, level + 1)}\n`,
+  [Type.Nested]: (item, level, nestedValue) => `${indent(level)}${item.key}: ` + nestedValue,
+}
+
+const stylishFormatter = (obj1, obj2) => {
+  const compareTree = fetchCompareTree(obj1, obj2)
+  const iter = (tree, level = 1) => {
+    let res = `{\n`
+    for (let item of tree) {
+      if (item.type === Type.Nested) {
+        res += printModification[item.type](item, level, iter(item.children, level + 1))
+        continue
+      }
+      res += printModification[item.type](item, level)
     }
-    if (obj1[key] !== undefined && obj2[key] !== undefined && obj1[key] === obj2[key]) {
-      res += `${indent(level)}${key}: ${printObj(obj1[key], level + 1)}\n`
-    }
-    if (obj1[key] !== undefined && obj2[key] !== undefined && obj1[key] !== obj2[key]) {
-      res += `${indentWithModify(level)}- ${key}: ${printObj(obj1[key], level + 1)}\n`
-      res += `${indentWithModify(level)}+ ${key}: ${printObj(obj2[key], level + 1)}\n`
-    }
-    if (obj1[key] !== undefined && obj2[key] === undefined) {
-      res += `${indentWithModify(level)}- ${key}: ${printObj(obj1[key], level + 1)}\n`
-    }
-    if (obj1[key] === undefined && obj2[key] !== undefined) {
-      res += `${indentWithModify(level)}+ ${key}: ${printObj(obj2[key], level + 1)}\n`
-    }
+    res += `${indent(level - 1)}}\n`
+    return res
   }
 
-  res += `${indent(level - 1)}}\n`
-
-  return res
+  return iter(compareTree)
 }
 
 const printObj = (obj, level = 1) => {
   if (['string', 'number', 'boolean'].includes(typeof obj) || obj === null) {
     return `${obj}`
   }
+
   let res = '{\n'
   for (let key in obj) {
     res += `${indent(level)}${key}: ${printObj(obj[key], level + 1)}\n`

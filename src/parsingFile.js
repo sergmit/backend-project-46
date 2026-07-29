@@ -1,6 +1,6 @@
 import fs from 'fs'
 import * as path from 'node:path'
-import {load} from 'js-yaml'
+import { load } from 'js-yaml'
 
 const fetchParser = (val) => {
   return {
