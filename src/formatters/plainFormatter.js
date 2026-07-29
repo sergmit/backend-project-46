@@ -38,6 +38,7 @@ const printModification = {
   [Type.Added]: item => `Property '${item.key}' was added with value: ${toString(item.newValue)}\n`,
   [Type.Removed]: item => `Property '${item.key}' was removed\n`,
   [Type.Updated]: item => `Property '${item.key}' was updated. From ${toString(item.oldValue)} to ${toString(item.newValue)}\n`,
+  [Type.Equal]: item => ``,
 }
 
 const formatter = (item1, item2) => {
