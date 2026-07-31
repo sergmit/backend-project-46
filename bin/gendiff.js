@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-import action from '../src/commander.js'
+import genDiff from "../src/genDiff.js";
 
-action()
+genDiff()

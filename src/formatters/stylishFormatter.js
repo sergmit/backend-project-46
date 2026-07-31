@@ -1,4 +1,4 @@
-import fetchCompareTree, { Type } from '../fetchCompareTree.js'
+import { Type } from '../fetchCompareTree.js'
 
 const printModification = {
   [Type.Added]: (item, level) => `${indentWithModify(level)}+ ${item.key}: ${printObj(item.newValue, level + 1)}\n`,
@@ -9,8 +9,7 @@ ${indentWithModify(level)}+ ${item.key}: ${printObj(item.newValue, level + 1)}\n
   [Type.Nested]: (item, level, nestedValue) => `${indent(level)}${item.key}: ` + nestedValue,
 }
 
-const stylishFormatter = (obj1, obj2) => {
-  const compareTree = fetchCompareTree(obj1, obj2)
+const stylishFormatter = (compareTree) => {
   const iter = (tree, level = 1) => {
     let res = `{\n`
     for (let item of tree) {
